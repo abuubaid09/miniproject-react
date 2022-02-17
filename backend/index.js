@@ -5,6 +5,7 @@ import cors from "cors";
 import db from "./config/Database.js";
 import router from "./routes/index.js";
 import Users from "./models/UserModel.js"; 
+import Product from "./models/productModel.js"
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,7 @@ try {
     await db.authenticate();
     console.log('Database Connected...');
     await Users.sync();
+    await Product.sync();
 } catch (error) {
     console.error(error);
 }
