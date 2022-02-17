@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 const Dashboard = () => {
     const [name, setName] = useState('');
@@ -25,7 +26,7 @@ const Dashboard = () => {
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
-                history.push("/");
+                history.push("/login");
             }
         }
     }
@@ -56,10 +57,17 @@ const Dashboard = () => {
         setUsers(response.data);
     }
 
+    const deleteUser = async (id) => {
+        await axios.delete(`http://localhost:5000/users/${id}`);
+        getUsers();
+    }
+
     return (
         <div className="container mt-5">
             <h1>Welcome Back: {name}</h1>
-            <button onClick={getUsers} className="button is-info">Get Users</button>
+            {/* <button onClick={getUsers} className="button is-info">Get Users</button> */}
+
+            <Link to="/register" className='button is-primary mt-5'>Register</Link>
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
@@ -80,6 +88,10 @@ const Dashboard = () => {
                             <td>{user.address}</td>
                             <td>{user.phone_number}</td>
                             <td>{user.join_date}</td>
+                            <td>
+                            <Link to={`/editUser/${user.id}`} className='button is-small is-info'>Edit</Link>
+                            <button onClick={ () => deleteUser(user.id)} className='button is-small is-danger'>Delete</button>
+                        </td>
                         </tr>
                     ))}
 

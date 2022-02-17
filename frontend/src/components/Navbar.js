@@ -8,7 +8,7 @@ const Navbar = () => {
     const Logout = async () => {
         try {
             await axios.delete('http://localhost:5000/logout');
-            history.push("/");
+            history.push("/login");
         } catch (error) {
             console.log(error);
         }
@@ -31,8 +31,11 @@ const Navbar = () => {
 
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
-                        <a href="/register" className="navbar-item">
-                            Home
+                        <a href="/dashboard" className="navbar-item">
+                            User
+                        </a>
+                        <a href="/product" className="navbar-item">
+                            Product
                         </a>
                     </div>
 

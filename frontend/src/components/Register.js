@@ -25,7 +25,7 @@ const Register = () => {
                 password: password,
                 confPassword: confPassword
             });
-            history.push("/");
+            history.push("/login");
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -91,4 +91,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Register;

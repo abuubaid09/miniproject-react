@@ -84,3 +84,46 @@ export const Logout = async(req, res) => {
     res.clearCookie('refreshToken');
     return res.sendStatus(200);
 }
+
+export const deleteUser = async (req, res) => {
+    try {
+        await Users.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({
+            "message": "User Deleted"
+        });
+    } catch (error) {
+        res.json({ message: error.message });
+    }  
+}
+
+export const updateUser = async (req, res) => {
+    try {
+        await Users.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({
+            "message": "Product Updated"
+        });
+    } catch (error) {
+        res.json({ message: error.message });
+    }  
+}
+
+export const getUserById = async (req, res) => {
+    try {
+        const user = await Users.findAll({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json(user[0]);
+    } catch (error) {
+        res.json({ message: error.message });
+    }  
+}
