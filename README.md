@@ -1,6 +1,6 @@
 # Mini-Project Frontend (React)
 
-his project is an e-commerce with simple features.
+This project is an e-commerce with simple features.
 
 ## E-commerce Features
 The features in this project are:
